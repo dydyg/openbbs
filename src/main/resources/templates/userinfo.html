@@ -1,0 +1,149 @@
+<%include("/include/header.html"){}%>
+<br>
+<br>
+<!--中间内容-->
+<div class="m-container m-padded-tb-big animated fadeIn">
+    <%directive dynamic archivediary,user;%>
+    <div class="ui  container">
+        <div class="ui stackable grid">
+            <!--左边文章列表-->
+            <div class="eleven wide column">
+                <div class="ui top attached segment">
+                <div class="ui middle aligned two column grid">
+                    <div class="column">
+                        <h3 class="ui teal header">归档</h3>
+                    </div>
+                    <div class="right aligned column">
+                        共 <h2 class="ui orange header m-inline-block m-text-thin"> ${page.size}</h2> 篇文章
+                    </div>
+                    <div class="ui mini  message">${message!}</div>
+                </div>
+            </div>
+                  <!--对话框-->
+                    <!--<div class="ui small modal">
+                        <h2 class="header">删除文章</h2>
+                        <div class="content">删除文章同时也会删除文章的所有评论,确定要删除吗?</div>
+                        <div class="actions">
+                        <button class="ui negative button">否</button>
+                        <button class="ui positive button" onclik="delete();return">是</button>
+                    </div>
+                </div>-->
+                 <% for(diary in archivediary !){%>
+                    <% if(diaryLP.index==1){%>
+                    <h3 class="ui center aligned header"> ${diary.updateTime,'yyyy'}&nbsp; &nbsp;<a href="/admin/diary/add"  class="ui mini right floated teal basic button">新增</a></h3>
+                    <%}else if(  trim(archivediary[ diaryLP.index-1 ].updateTime,'yyyy')!=trim(diary.updateTime,'yyyy') ){%>
+                    <h3 class="ui center aligned header"> ${diary.updateTime,'yyyy'}</h3>
+                    <%}%>
+                <div class="ui fluid vertical menu">
+                    <a href="/diarybyid?id=${diary.id}" target="_blank" class="item">
+                      <span>
+                        <i class="mini teal circle icon"></i><span>${diary.title}</span>
+                        <div class="ui teal basic left pointing label m-padded-mini">${diary.updateTime,'MMMdd'}</div>
+                      </span>
+                        <div class="ui orange basic left pointing label m-padded-mini"> ${diary.flag}</div>
+                    </a>
+                    <div class="ui orange basic left pointing label m-padded-mini">
+                    <a href="/admin/diary/updateById?id=${diary.id}&pageNum=${page.prePage+1}">编辑</a>
+                    </div>
+
+                    <div class="ui orange basic left pointing label m-padded-mini" id="delete">
+                        <a href="/admin/mydiary/delete?id=${diary.id}&pageNum=${page.prePage+1}" onclick="return confirm('确认删除文章及其评论吗？',this.href)">删除</a>
+                    </div>
+                </div>
+                <%}%>
+                <!--footer-->
+                <div class="ui bottom attached segment" >
+                    <div class="ui middle aligned two column grid">
+                        <div class="column">
+                            <a href="/userinfo?pageNum=${page.prePage}"    class="ui mini teal basic button">上一页</a>
+                        </div>
+                        <div class="right aligned column">
+                            <a href="/userinfo?pageNum=${page.nextPage}"   class="ui mini teal basic button">下一页</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+                <!--右边的top-->
+            <div class="five wide column">
+
+                    <!--分类-->
+                    <div class="ui segments">
+                        <div class="ui secondary segment">
+                            <div class="ui one column grid">
+                                <div class="ui cards">
+                                    <div class="card">
+                                        <div class="image middle">
+                                            <img src="${ctxPath}/images/author.jpg">
+                                        </div>
+                                        <div class="content">
+                                            <div class="header"><i class="item">姓名：</i>${user.userRealName} <a href="/personinfo?uid=${user.id}">编辑</a></div>
+                                            <div class="meta">
+                                            </div>
+                                            <div class="description">职位</div>
+                                        </div>
+                                        <div class="extra content">
+                                            <span class="right floated">2016年入职 </span>
+                                            <span><i class="user icon"></i> 点赞数量</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+        </div>
+    </div>
+
+
+</div>
+
+<br>
+<br>
+<!--底部footer-->
+<%include("/include/footer.html"){}%>
+<script>
+
+    $('.menu.toggle').click(function () {
+        $('.m-item').toggleClass('m-mobile-hide');
+    });
+
+    $('.ui.dropdown').dropdown({
+        on : 'hover'
+    });
+
+
+   /* $('#delete').click(function (hr) {
+        /!*对话框*!/
+        $('.ui.modal').modal({
+            blurring:true,
+            inverted:true,
+        }).modal('show');
+    });*/
+    $('.ui.form').form({
+        fields : {
+            username : {
+                identifier: 'username',
+                rules: [{
+                    type : 'empty',
+                    prompt: '请输入用户名'
+                }]
+            },
+            password : {
+                identifier: 'password',
+                rules: [{
+                    type : 'empty',
+                    prompt: '请输入密码'
+                }]
+            }
+        }
+    });
+
+</script>
+
+</body>
+</html>
+
+

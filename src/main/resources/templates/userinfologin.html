@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head >
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>回车科技论坛</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css" >
+    <link rel="stylesheet" href="${ctxPath}/css/me.css" >
+</head>
+<body>
+<!--导航-->
+<nav  class="ui  inverted attached segment m-padded-tb-mini m-shadow-small" >
+    <div class="ui  container  ">
+        <div class="ui  inverted  stackable fixed menu ">
+            <h2 class="ui teal header item">回车科技论坛</h2>
+            <a href="/hcbbs" class="active m-item item m-mobile-hide"><i class="mini home icon"></i>首页</a>
+            <a href="/types" class="m-item item m-mobile-hide"><i class="mini idea icon"></i>分类</a>
+            <a href="/tags" class="m-item item m-mobile-hide"><i class="mini tags icon"></i>标签</a>
+            <a href="/userinfo" class="m-item item m-mobile-hide"><i class="mini clone icon"></i>个人中心</a>
+            <!--<a href="/archives" class="m-item item m-mobile-hide"><i class="mini clone icon"></i>归档</a>-->
+            <a href="/register" class=" m-item item m-mobile-hide"><i class="mini add user icon"></i>注册</a>
+        </div>
+    </div>
+    <a href="#" class="ui menu toggle black icon button m-right-top m-mobile-show">
+        <i class="sidebar icon"></i>
+    </a>
+</nav>
+<br>
+<br>
+<div class="m-container-small m-padded-tb-massive" style="max-width: 30em !important;">
+    <div class="ui  container">
+        <div class="ui middle aligned center aligned grid">
+            <div class="column">
+                <h2 class="ui teal image header">
+                    <div class="content">
+                        个人中心登录
+                    </div>
+                </h2>
+                <form class="ui large form" method="post" action="/userinfologin" >
+                    <div class="ui  segment">
+                        <div class="field">
+                            <div class="ui left icon input">
+                                <i class="user icon"></i>
+                                <input type="text" name="username" placeholder="用户名">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui left icon input">
+                                <i class="lock icon"></i>
+                                <input type="password" name="password" placeholder="密码">
+                            </div>
+                        </div>
+                        <button class="ui fluid large teal submit button">登   录</button>
+                    </div>
+                    <div class="ui mini  message">${message!}</div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<br>
+<br>
+<br>
+<%include("/include/footer.html"){}%>
+<script>
+
+    $('.ui.form').form({
+        fields: {
+            username: {
+                identifier: 'username',
+                rules: [{
+                    type   : 'empty',
+                    prompt : '请输入用户名'
+                }]
+            },
+            password : {
+                identifier: 'password',
+                rules: [{
+                    type : 'empty',
+                    prompt: '请输入密码'
+                }]
+            }
+        }
+    });
+
+</script>
+
+</body>
+</html>

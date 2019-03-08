@@ -1,0 +1,212 @@
+<%include("/include/header.html"){}%>
+<br>
+ <div class="m-container-small m-padded-tb-massive" style="max-width: 75em !important;">
+   <div class="ui  container">
+     <div class="ui middle aligned center aligned grid">
+       <div class="column">
+         <h2 class="ui teal image header">
+           <div class="content">
+               <img class="ui small circular image" src="${ctxPath}/images/author.jpg">
+           </div>
+         </h2>
+         <form class="ui large form" method="post" action="/saveperson?uid=${person.uid}" >
+           <div class="ui  segment">
+               <h4 class="ui blue  header">个人信息</h4>
+             <div class="inline fields">
+                 <label>姓 名:</label>
+                 <div class="three wide field">
+                     <input type="text" name="realname" placeholder="姓名" value="${person.realname}">
+                 </div>
+                 <label>性 别:</label>
+                 <div class="ui mini  left icon input">
+                     <div class="ui selection dropdown">
+                         <input type="hidden" name="sex"  value="${person.sex}">
+                         <i class="dropdown icon"></i>
+                         <div class="default text">性别</div>
+                         <div class="menu">
+                             <div class="item" data-value="0">男</div>
+                             <div class="item" data-value="1">女</div>
+                         </div>
+                     </div>
+                  </div>
+                 <label> 民 族:</label>
+                 <div class="ui mini  left icon input">
+                     <input type="text" name="type" placeholder="民族" value="${person.type}">
+                 </div>
+                 <label>政治面貌:</label>
+                 <div class="three wide field">
+                     <input type="text" name="politicallook" placeholder="政治面貌" value="${person.politicallook}">
+                 </div>
+             </div>
+               <div class="inline fields">
+                       <label>年龄:</label>
+                       <div class="three wide field">
+                           <input type="text" name="age" placeholder="年龄" value="${person.age}">
+                       </div>
+
+                       <label>身份证号:</label>
+                       <div class="four wide field">
+                            <input type="text" name="birthnum" placeholder="身份证号" value="${person.birthnum}">
+                       </div>
+
+                       <label>婚姻状况:</label>
+                       <div class="three wide field">
+                       <input type="text" name="maritalstatus" placeholder="婚姻状况" value="${person.maritalstatus}">
+                       </div>
+
+                       <label>岗位:</label>
+                       <div class="two wide field">
+                           <input type="text" name="post" placeholder="在职岗位" value="${person.post}">
+                       </div>
+
+               </div>
+             <div class="inline fields">
+                   <label>学&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;历:</label>
+                   <div class="three wide field">
+                       <div class="ui mini  left icon input">
+                       <div class="ui selection dropdown">
+                           <input type="hidden" name="education"  value="${person.education}">
+                           <i class="dropdown icon"></i>
+                           <div class="default text">学历</div>
+                           <div class="menu">
+                               <div class="item" data-value="0">博士</div>
+                               <div class="item" data-value="1">硕士</div>
+                               <div class="item" data-value="2">本科</div>
+                               <div class="item" data-value="3">专科</div>
+                               <div class="item" data-value="4">高中</div>
+                           </div>
+                       </div>
+                       </div>
+                   </div>
+                 <label>毕业院校:</label>
+                 <div class="eight wide field">
+                     <input type="text" name="university" placeholder="毕业院校" value="${person.university}">
+                 </div>
+
+             </div>
+             <div class="inline fields">
+                 <label>联系电话:</label>
+                 <div class="three wide field">
+                   <input type="text" name="phone" placeholder="个人联系电话" value="${person.phone}">
+               </div>
+                 <label>现住地址:</label>
+                 <div class="eight wide field">
+                     <input type="text" name="presentaddress" placeholder="现住地址" value="${person.presentaddress}">
+                 </div>
+           </div>
+               <div class="inline fields">
+                   <label>籍贯:</label>
+                   <div class="three wide field">
+                       <input type="text" name="nativeplace" placeholder="籍贯" value="${person.nativeplace}">
+                   </div>
+                   <label>职位:</label>
+                   <div class="three wide field">
+                       <input type="text" name="position" placeholder="公司职位" value="${person.position}">
+                   </div>
+                   <label>QQ:</label>
+                   <div class="three wide field">
+                       <input type="text" name="qq" placeholder="QQ" value="${person.qq}">
+                   </div>
+                   <label>入职日期:</label>
+                   <div class="ui calendar">
+                       <div class="ui mini  left icon input">
+                           <i class="calendar icon"></i>
+                           <input type="date" name="entrydate" placeholder="入职日期" value="${person.entrydate,'yyyy-MM-dd'}">
+                       </div>
+                   </div>
+               </div>
+             <div class="inline fields">
+
+                 <label>紧急联络人:</label>
+                 <div class="three wide field">
+                       <input type="text" name="emergencyliaison" placeholder="紧急联络人" value="${person.emergencyliaison}">
+                   </div>
+
+                 <label>联系电话:</label>
+                 <div class="three wide field">
+                       <input type="text" name="emergencyphone" placeholder="联系电话" value="${person.emergencyphone}" >
+                   </div>
+
+                 <label>关系:</label>
+
+                 <div class="ui mini  left icon input">
+                     <div class="ui selection dropdown">
+                         <input type="hidden" name="relationship" value="${person.relationship}">
+                         <i class="dropdown icon"></i>
+                         <div class="default text">关系</div>
+                         <div class="menu">
+                             <div class="item" data-value="0">父子</div>
+                             <div class="item" data-value="1">母子</div>
+                             <div class="item" data-value="2">夫妻</div>
+                             <div class="item" data-value="3">爷孙</div>
+                             <div class="item" data-value="4">婆孙</div>
+                             <div class="item" data-value="5">外孙</div>
+                             <div class="item" data-value="6">亲戚</div>
+                             <div class="item" data-value="7">家人</div>
+                             <div class="item" data-value="8">朋友</div>
+                         </div>
+                     </div>
+                 </div>
+                 <label>离职日期:</label>
+                 <div class="ui calendar" id="example1">
+                     <div class="ui mini input left icon">
+                         <i class="calendar icon"></i>
+                         <input type="date" name="leavedate" placeholder="离职日期" value="${person.leavedate,'yyyy-MM-dd'}">
+                     </div>
+                 </div>
+               </div>
+             <button class="ui  large teal submit button">提  交</button>
+           </div>
+           <div class="ui mini success message">${message!}</div>
+         </form>
+
+       </div>
+     </div>
+   </div>
+ </div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+<!--<script src="${ctxPath}/lib/calendar/calendar.min.js" charset="utf-8"></script>-->
+
+<script>
+    $('.ui.dropdown').dropdown();
+/*    $('#example1').calendar({
+        type: 'date',
+        formatter: { // 自定义日期的格式
+            date: function(date, settings) {
+                if (!date) return '';
+                var year  = date.getFullYear();
+                var month = date.getMonth() + 1;
+                var day   = date.getDate();
+                month = month < 10 ? '0'+month : month;
+                day   = day   < 10 ? '0'+day   : day;
+                return year + '-' + month + '-' + day;
+            }
+        }
+    });*/
+
+  $('.ui.form').form({
+    fields : {
+      username : {
+        identifier: 'username',
+        rules: [{
+          type : 'empty',
+          prompt: '请输入用户名'
+        }]
+      },
+      password : {
+        identifier: 'password',
+        rules: [{
+          type : 'empty',
+          prompt: '请输入密码'
+        }]
+      }
+    }
+  });
+
+</script>
+
+</body>
+</html>

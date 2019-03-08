@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hc.openbbs.mapper.TagMapper" >
+    <resultMap id="TagMap" type="com.hc.openbbs.entity.Tag" >
+        <id property="id" column="id" />
+        <result property="name" column="name" />
+        <result property="diaryCount" column="diary_count" />
+    </resultMap>
+
+    <select id="getTagsByBbsId" parameterType="int" resultMap="TagMap">
+        select * from bbs_tag  where id in (select tag_id from bbs_diary_tag where diary_id=#{id})
+    </select>
+    <!--查询所有文章getBbsList-->
+    <select id="getTagList" resultMap="TagMap">
+        select
+        b.id,
+        b.name,
+        IFNULL(bd2.diary_count,0) AS diary_count
+        from bbs_tag b
+        LEFT JOIN (SELECT COUNT(bdt.id) AS diary_count,bdt.tag_id FROM bbs_diary_tag bdt GROUP BY bdt.tag_id)bd2 ON b.id=bd2.tag_id
+    </select>
+</mapper>

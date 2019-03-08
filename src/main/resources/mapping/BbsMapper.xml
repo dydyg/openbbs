@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hc.openbbs.mapper.BbsMapper" >
+
+    <resultMap id="BaseResultMap" type="com.hc.openbbs.entity.Diary"  >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="title" property="title" jdbcType="VARCHAR" />
+        <result column="description" property="description" jdbcType="VARCHAR" />
+        <result column="content" property="content" jdbcType="VARCHAR" />
+        <result column="first_picture" property="firstPicture" jdbcType="VARCHAR" />
+        <result column="flag" property="flag" jdbcType="VARCHAR" />
+        <result column="views" property="views" jdbcType="INTEGER" />
+        <result column="appreciation" property="appreciation" jdbcType="BIT" />
+        <result column="share_statement" property="shareStatement" jdbcType="BIT" />
+        <result column="commentabled" property="commentabled" jdbcType="BIT" />
+        <result column="published" property="published" jdbcType="BIT" />
+        <result column="recommend" property="recommend" jdbcType="BIT" />
+        <result column="create_time" property="createTime" jdbcType="DATE" />
+        <result column="update_time" property="updateTime" jdbcType="DATE" />
+        <association  column="user" property="user" javaType="com.hc.openbbs.entity.User">
+            <id  column="id"  /><!--property="id"  查询的时候添加了属性值，会给实体user类相应的user赋予diary 的id值-->
+            <result column="uid" property="id" />
+            <result column="user_login_name" property="userLoginName" />
+            <result column="user_nickname" property="userNickname" />
+        </association>
+        <association  column="type" property="type" javaType="com.hc.openbbs.entity.Type">
+            <id  column="id"  /><!--property="id"  查询的时候添加了属性值，会给实体type类相应的user赋予diary 的id值-->
+            <result column="tid" property="id" />
+            <result column="type_name" property="typeName" />
+        </association>
+        <collection property="tags" ofType="com.hc.openbbs.entity.Tag"
+                    column="id" select="com.hc.openbbs.mapper.TagMapper.getTagsByBbsId">
+        </collection>
+    </resultMap>
+
+    <sql id="bbsColumns" >
+        b.id,b.title,b.description,b.content,b.first_picture,b.flag,b.views,b.appreciation,b.share_statement,b.commentabled,b.published,b.recommend,b.create_time,b.update_time,u.user_login_name,u.user_nickname,t.type_name,u.id as uid,t.id as tid
+    </sql>
+
+    <!--查询所有文章getBbsList-->
+    <select id="getBbsList" resultMap="BaseResultMap">
+        select
+        <include refid="bbsColumns" />
+        from bbs_diary b
+        left join bbs_user u on b.user_id=u.id
+        left join bbs_type t on b.type_id=t.id
+        ORDER BY b.update_time DESC
+    <!--left join bbs_tag ta on b.tag_id=ta.id-->
+</select>
+    <!--根据用户查询所有文章getBbsList-->
+    <select id="getBbsListByUid" resultMap="BaseResultMap">
+        select
+        <include refid="bbsColumns" />
+        from bbs_diary b
+        left join bbs_user u on b.user_id=u.id
+        left join bbs_type t on b.type_id=t.id
+        WHERE b.user_id=#{uid}
+        ORDER BY b.update_time DESC
+        <!--left join bbs_tag ta on b.tag_id=ta.id-->
+    </select>
+    <!--查询文章getBbsById-->
+    <select id="getBbsById" resultMap="BaseResultMap">
+        select
+        <include refid="bbsColumns" />
+        from bbs_diary b
+        left join bbs_user u on b.user_id=u.id
+        left join bbs_type t on b.type_id=t.id
+        WHERE b.id=#{id}
+    </select>
+    <!--插入文章addBbs  parameterType="com.hc.openbbs.entity.Diaryry"-->
+    <insert id="addBbs" useGeneratedKeys="true" keyProperty="id">
+        insert into bbs_diary(flag,title,content,first_picture,description,recommend,share_statement,appreciation,commentabled,published,create_time,update_time,type_id,user_id) values(#{flag},#{title},#{content},#{firstPicture},#{description},#{recommend},#{shareStatement},#{appreciation},#{commentabled},#{published},#{createTime},#{updateTime},#{typeId},#{userId})
+    </insert>
+    <!--修改文章-->
+    <update id="updateBbsById" >
+        UPDATE bbs_diary SET
+              flag = #{flag},
+              title = #{title},
+              content = #{content},
+              first_picture = #{firstPicture},
+              description = #{description},
+              recommend = #{recommend},
+              share_statement = #{shareStatement},
+              appreciation = #{appreciation},
+              commentabled = #{commentabled},
+              published = #{published},
+              update_time = #{updateTime},
+              type_id = #{typeId}
+        WHERE ID = #{id}
+    </update>
+    <!--根据分类ID查询文章getBbsByTypeId-->
+    <select id="getBbsByTypeId" resultMap="BaseResultMap">
+        select
+        <include refid="bbsColumns" />
+        from bbs_diary b
+        left join bbs_user u on b.user_id=u.id
+        left join bbs_type t on b.type_id=t.id
+        WHERE b.type_id=#{typeid}
+    </select>
+
+    <!--根据标签ID查询文章-->
+    <select id="getBbsByTagId" resultMap="BaseResultMap">
+        select
+        <include refid="bbsColumns" />
+        from bbs_diary b
+        left join bbs_user u on b.user_id=u.id
+        left join bbs_type t on b.type_id=t.id
+        WHERE b.id in (select diary_id from bbs_diary_tag where tag_id=#{tagid})
+    </select>
+</mapper>

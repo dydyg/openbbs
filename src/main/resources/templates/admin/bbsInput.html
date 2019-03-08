@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>文章编辑</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
+  <link rel="stylesheet" href="${ctxPath}/lib/editormd/css/editormd.min.css">
+  <link rel="stylesheet" href="${ctxPath}/css/me.css">
+</head>
+<body>
+<%directive dynamic types,tags,diary;%>
+  <!--导航-->
+  <nav class="ui inverted attached segment m-padded-tb-mini m-shadow-small" >
+    <div class="ui container">
+      <div class="ui inverted secondary stackable menu">
+        <h2 class="ui teal header item">管理后台</h2>
+        <a href="#" class="active m-item item m-mobile-hide"><i class="mini home icon"></i>文章</a>
+        <a href="#" class=" m-item item m-mobile-hide"><i class="mini idea icon"></i>分类</a>
+        <a href="#" class="m-item item m-mobile-hide"><i class="mini tags icon"></i>标签</a>
+        <div class="right m-item m-mobile-hide menu">
+          <div class="ui dropdown  item">
+            <div class="text">
+              <img class="ui avatar image" src="https://unsplash.it/100/100?image=1005">
+              YangGuo
+            </div>
+            <i class="dropdown icon"></i>
+            <div class="menu">
+              <a href="/admin/logout" class="item">注销</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <a href="#" class="ui menu toggle black icon button m-right-top m-mobile-show">
+      <i class="sidebar icon"></i>
+    </a>
+  </nav>
+  <div class="ui attached pointing menu">
+    <div class="ui container">
+      <div class="right menu">
+        <a href="#"  class="teal active item">发布</a>
+        <a href="#"  class="item">列表</a>
+      </div>
+    </div>
+  </div>
+
+  <!--中间内容-->
+  <div  class="m-container m-padded-tb-big">
+    <div class="ui container">
+      <form id="diary-form" action="/admin/diary/myupdate?id=${diary.id}"  method="post" class="ui form">
+        <input type="hidden" name="published" value="${diary.published}">
+        <input type="hidden" name="id" value="${diary.id}">
+        <div class="required field">
+          <div class="ui left labeled input">
+            <div class="ui selection compact teal basic dropdown label">
+              <input type="hidden" name="flag" value="原创"  >
+              <i class="dropdown icon"></i>
+              <div class="text">原创</div>
+              <div class="menu">
+                <div class="item" data-value="原创">原创</div>
+                <div class="item" data-value="转载">转载</div>
+                <div class="item" data-value="翻译">翻译</div>
+              </div>
+            </div>
+            <input type="text" name="title" placeholder="标题" value="${diary.title}">
+          </div>
+        </div>
+
+        <div class="required field">
+          <div id="md-content" >
+            <!--<textarea placeholder="博客内容" name="content" style="display: none" text="*{content}"></textarea>-->
+            <textarea placeholder="文章内容" name="content" style="display: none" class="editormd-markdown-textarea" text="">${diary.content}</textarea>
+          </div>
+        </div>
+
+        <div class="two fields">
+          <div class="required field">
+            <div class="ui left labeled action input">
+              <label class="ui compact teal basic label">分类</label>
+              <div class="ui fluid selection dropdown">
+                <input type="hidden" name="typeId" value="${diary.type.id!}">
+                <i class="dropdown icon"></i>
+                <div class="default text">分类</div>
+                <div class="menu">
+                  <%for(type in types !){%>
+                  <div  class="item" data-value="${type.id}">${type.typeName}</div>
+                  <%}%>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class=" field">
+            <div class="ui left labeled action input">
+              <label class="ui compact teal basic label">标签</label>
+              <div class="ui fluid selection multiple search  dropdown">
+                <input type="hidden" name="tagIds"  value="${diary.tagIds}">
+                <i class="dropdown icon"></i>
+                <div class="default text">标签</div>
+                <div class="menu">
+                    <%for(tag in tags !){%>
+                    <div  class="item"  data-value="${tag.id}" text="${tag.name}">${tag.name}</div>
+                    <%}%>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="required field">
+          <div class="ui left labeled input">
+            <label class="ui teal basic label">首图</label>
+            <input type="text" name="firstPicture"  placeholder="首图引用地址" value="${diary.firstPicture}">
+          </div>
+        </div>
+
+        <div class="required field">
+          <textarea name="description"  placeholder="博客描述..." maxlength="200">${diary.description}</textarea>
+        </div>
+
+        <div class="inline fields">
+          <div class="field">
+            <div class="ui checkbox">
+              <input type="checkbox" id="recommend" name="recommend" btflag="${diary.recommend}" class="hidden">
+              <label for="recommend">推荐</label>
+            </div>
+          </div>
+          <div class="field">
+            <div class="ui checkbox">
+              <input type="checkbox" id="shareStatement" name="shareStatement" btflag="${diary.shareStatement}"  class="hidden">
+              <label for="shareStatement">转载声明</label>
+            </div>
+          </div>
+          <div class="field">
+            <div class="ui checkbox">
+              <input type="checkbox" id="appreciation"  name="appreciation"  btflag="${diary.appreciation}" class="hidden">
+              <label for="appreciation">赞赏</label>
+            </div>
+          </div>
+          <div class="field">
+            <div class="ui checkbox">
+              <input type="checkbox" id="commentabled"  name="commentabled" btflag="${diary.commentabled}" class="hidden">
+              <label for="commentabled">评论</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="ui error message"></div>
+
+        <div class="ui right aligned container">
+          <button type="button" class="ui button" onclick="window.history.go(-1)" >返回</button>
+          <button type="button" id="save-btn" class="ui secondary button">保存</button>
+          <button type="button" id="publish-btn" class="ui teal button">发布</button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+  <br>
+  <br>
+   <%include("../include/admin/footer.html"){}%>
+  <!--/*/</th:block>/*/-->
+
+
+  <script>
+
+    //初始化Markdown编辑器
+    var contentEditor;
+    $(function() {
+      contentEditor = editormd("md-content", {
+        width   : "90%",
+        height  : 640,
+       /// emoji: true,
+        syncScrolling : "single",
+//        path    : "../static/lib/editormd/lib/"
+        path    : "/lib/editormd/lib/",
+        /**上传图片相关配置如下*/
+        imageUpload : true,
+        imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+        imageUploadURL : "/uploadfile",//注意你后端上传服务/uploadfile属于请求路径
+      });
+    });
+    //  E:/hcbbs_project/picture/ editor.md期望得到一个json格式的上传后的返回值，格式是这样的：
+    /*
+    {
+        success : 0 | 1,           // 0 表示上传失败，1 表示上传成功
+        message : "提示的信息，上传成功或上传失败及错误信息等。",
+        url     : "图片地址"        // 上传成功时才返回
+    }
+    */
+
+    $('.menu.toggle').click(function () {
+      $('.m-item').toggleClass('m-mobile-hide');
+    });
+
+    $('.ui.dropdown').dropdown({
+      on : 'hover'
+    });
+
+    $('#save-btn').click(function () {
+      $('[name="published"]').val(false);
+      $('#diary-form').submit();
+    });
+
+
+    $('#publish-btn').click(function () {
+      $('[name="published"]').val(true);
+      $('#diary-form').submit();
+    });
+    $("input[type='checkbox']").each(function(){
+       if($(this).attr("btflag")=='true'){
+           $(this).attr("checked","checked");
+       }else{
+       };
+    });
+  /*$('.ui.checkbox').checkbox({
+      /!*$("#xx").attr("checked",true);
+          alert('onChange called<br>');
+  *!/
+
+     // alert($(this).val())
+  /!*      onChecked: function() {
+            //$(this).val('false');
+            $(this).attr("checked",true);
+        },
+        onUnchecked: function() {
+            //$(this).val('true');
+            $(this).attr("checked",false);
+
+        },*!/
+
+        });*/
+    $('.ui.form').form({
+      fields : {
+        title : {
+          identifier: 'title',
+          rules: [{
+            type : 'empty',
+            prompt: '标题：请输入博客标题'
+          }]
+        },
+        content : {
+          identifier: 'content',
+          rules: [{
+            type : 'empty',
+            prompt: '标题：请输入博客内容'
+          }]
+        },
+        typeId : {
+          identifier: 'type.id',
+          rules: [{
+            type : 'empty',
+            prompt: '标题：请输入博客分类'
+          }]
+        },
+        firstPicture : {
+          identifier: 'firstPicture',
+          rules: [{
+            type : 'empty',
+            prompt: '标题：请输入博客首图'
+          }]
+        },
+        description : {
+          identifier: 'description',
+          rules: [{
+            type : 'empty',
+            prompt: '标题：请输入博客描述'
+          }]
+        }
+      }
+    });
+
+  </script>
+</body>
+</html>

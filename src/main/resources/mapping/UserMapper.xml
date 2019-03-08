@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hc.openbbs.mapper.UserMapper" >
+
+  <resultMap id="BaseResultMap" type="com.hc.openbbs.entity.User" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="user_login_name" property="userLoginName" jdbcType="VARCHAR" />
+    <result column="user_real_name" property="userRealName" jdbcType="VARCHAR" />
+    <result column="user_login_password" property="userLoginPassword" jdbcType="VARCHAR" />
+    <result column="user_email" property="userEmail" jdbcType="VARCHAR" />
+    <result column="user_score" property="userScore" jdbcType="VARCHAR" />
+    <result column="user_level" property="userLevel" jdbcType="VARCHAR" />
+    <result column="user_banlance" property="userBanlance" jdbcType="VARCHAR" />
+    <result column="user_corp" property="userCorp" jdbcType="VARCHAR" />
+    <result column="user_nickname" property="userNickname" jdbcType="VARCHAR" />
+    <result column="user_type" property="userType" jdbcType="VARCHAR" />
+    <result column="user_photo" property="userPhoto" jdbcType="VARCHAR" />
+    <result column="user_login_ip" property="userLoginIp" jdbcType="VARCHAR" />
+    <result column="user_login_date" property="userLoginDate" jdbcType="DATE" />
+    <result column="user_login_flag" property="userLoginFlag" jdbcType="VARCHAR" />
+    <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+    <result column="createbyid" property="createbyid" jdbcType="VARCHAR" />
+    <result column="createbyname" property="createbyname" jdbcType="VARCHAR" />
+    <result column="createdate" property="createdate" jdbcType="DATE" />
+    <result column="updatebyid" property="updatebyid" jdbcType="VARCHAR" />
+    <result column="updatebyname" property="updatebyname" jdbcType="VARCHAR" />
+    <result column="updatedate" property="updatedate" jdbcType="DATE" />
+    <result column="delflag" property="delflag" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <sql id="userColumns" >
+    id,user_login_name,user_real_name,user_login_password,user_email,user_score,user_level,user_banlance,user_corp,user_nickname,user_photo,user_login_date,remarks,createbyid,createbyname,createdate,updatebyid,updatebyname,updatedate,delflag
+  </sql>
+
+    <!--查询所有用户getAllUser-->
+  <select id="getAllUser" resultMap="BaseResultMap">
+    select
+      <include refid="userColumns" />
+    from bbs_user
+  </select>
+
+    <!--根据登陆名称和登陆密码，查询用户-->
+    <select id="getByLoginNameAndPwd"  resultMap="BaseResultMap">
+        SELECT
+        <include refid="userColumns"/>
+        FROM bbs_user
+        WHERE user_login_name=#{LoginName,jdbcType=VARCHAR} AND user_login_password=#{LoginPassword,jdbcType=VARCHAR} AND delflag ="0"
+    </select>
+    <!--根据登陆名称，查询用户-->
+    <select id="getByLoginName"  resultMap="BaseResultMap">
+        SELECT
+        <include refid="userColumns"/>
+        FROM bbs_user
+        WHERE user_login_name=#{LoginName,jdbcType=VARCHAR} AND delflag ="0"
+    </select>
+    <!--新增用户"-->
+    <insert id="addUser" >
+      insert into bbs_user(user_login_name,user_real_name,user_nickname,user_login_password,user_email) values(#{userLoginName},#{userRealName},#{userNickname},#{userLoginPassword},#{userEmail})
+    </insert>
+   <!--修改用户-->
+</mapper>

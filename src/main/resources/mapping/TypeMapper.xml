@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hc.openbbs.mapper.TypeMapper" >
+    <resultMap id="TypeMap" type="com.hc.openbbs.entity.Type" >
+        <id property="id" column="id" />
+        <result property="typeName" column="type_name" />
+        <result property="diaryCount" column="diary_count" />
+    </resultMap>
+
+
+    <resultMap id="TypeDiaryMap" type="com.hc.openbbs.entity.Type" >
+        <id property="id" column="id" />
+        <result property="typeName" column="type_name" />
+        <result property="diaryCount" column="diary_count" />
+        <collection property="diarys" ofType="com.hc.openbbs.entity.Diary"
+                    column="id" select="com.hc.openbbs.mapper.BbsMapper.getBbsByTypeId">
+        </collection>
+    </resultMap>
+    <!--查询所有文章getBbsList-->
+    <select id="getTypeList" resultMap="TypeMap">
+        select
+        b.id,
+        b.type_name,
+        IFNULL(bd2.diary_count,0) AS diary_count
+        from bbs_type b
+        LEFT JOIN (SELECT COUNT(bd.id) AS diary_count,bd.type_id FROM BBS_DIARY bd GROUP BY bd.type_id)bd2 ON b.id=bd2.type_id
+    </select>
+
+    <!--查询所有文章getBbsList-->
+    <select id="getTypeDiaryList" resultMap="TypeDiaryMap">
+        select
+        b.id,
+        b.type_name,
+        IFNULL(bd2.diary_count,0) AS diary_count
+        from bbs_type b
+        LEFT JOIN (SELECT COUNT(bd.id) AS diary_count,bd.type_id FROM BBS_DIARY bd GROUP BY bd.type_id)bd2 ON b.id=bd2.type_id
+    </select>
+</mapper>

@@ -1,0 +1,56 @@
+<%include("/include/header.html"){}%>
+<br><br>
+  <!--中间内容-->
+  <div  class="m-container-small m-padded-tb-big">
+    <div class="ui container">
+      <!--header-->
+      <div class="ui top attached padded segment">
+        <div class="ui middle aligned two column grid">
+          <div class="column">
+            <h3 class="ui teal header">归档</h3>
+          </div>
+          <div class="right aligned column">
+            共 <h2 class="ui orange header m-inline-block m-text-thin"> ${page.size}</h2> 篇文章
+          </div>
+        </div>
+      </div>
+
+      <%directive dynamic archivediary;%>
+      <% for(diary in archivediary !){%>
+      <h3 class="ui center aligned header">${diary.updateTime,'yyyy'}</h3>
+      <div class="ui fluid vertical menu">
+        <a href="/diarybyid?id=${diary.id}" target="_blank" class="item">
+          <span>
+            <i class="mini teal circle icon"></i><span>${diary.title}</span>
+            <div class="ui teal basic left pointing label m-padded-mini">${diary.updateTime,'MMMdd'}</div>
+          </span>
+          <div class="ui orange basic left pointing label m-padded-mini">${diary.flag}</div>
+        </a>
+      </div>
+        <%}%>
+        <!--footer-->
+        <div class="ui bottom attached segment" >
+            <div class="ui middle aligned two column grid">
+                <div class="column">
+                    <a href="/archives?pageNum=${page.prePage}"    class="ui mini teal basic button">上一页</a>
+                </div>
+                <div class="right aligned column">
+                    <a href="/archives?pageNum=${page.nextPage}"   class="ui mini teal basic button">下一页</a>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+
+  <br>
+  <br>
+  <!--底部footer-->
+  <%include("/include/footer.html"){}%>
+  <script>
+    $('.menu.toggle').click(function () {
+      $('.m-item').toggleClass('m-mobile-hide');
+    });
+
+  </script>
+</body>
+</html>

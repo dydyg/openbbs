@@ -1,0 +1,10 @@
+spring:
+  profiles:
+    active: pro
+#头像放置路径
+headPath:
+    #home: C:\\home\\myblog\\pic\\   #由于Chrome浏览器不允许加载本地文件，可以考虑改为相对路径
+    home: /userheadpic/     #放到工程根目录的下一级pic文件夹下
+#支持图片类型
+pictureLimit:
+    suffix: png,bmp,jpg,jpeg,gif

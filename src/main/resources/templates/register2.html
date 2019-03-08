@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>回车科技论坛</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css" >
+  <link rel="stylesheet" href="${ctxPath}/css/me.css">
+  <link rel="stylesheet" href="${ctxPath}/css/style.css">
+</head>
+<body>
+<br>
+<br>
+<br>
+ <div class="m-container-small m-padded-tb-massive" style="max-width: 60em !important;">
+   <div class="ui  container">
+     <div class="ui middle aligned center aligned two column grid">
+       <div class="column">
+         <h2 class="ui teal image header">
+           <div class="content">
+             用户注册
+           </div>
+         </h2>
+         <form class="ui large form" method="post" action="/admin/login" >
+           <div class="ui segment">
+               <!--左侧-->
+                 <div class="field">
+                       <div class="ui mini left icon input">
+                         <i class="user icon"></i>
+                         <input type="text" name="userLoginName" placeholder="用户名：">
+                       </div>
+                 </div>
+                 <div class="field">
+                     <div class="ui mini  left icon input">
+                         <i class="user icon"></i>
+                         <input type="text" name="userRealName" placeholder="真实姓名：">
+                     </div>
+                 </div>
+                 <div class="field">
+                     <div class="ui mini left icon input">
+                         <i class="user icon"></i>
+                         <input type="text" name="userNickname" placeholder="昵称：">
+                     </div>
+                 </div>
+                 <div class="field">
+                     <div class="ui mini left icon input">
+                         <i class="lock icon"></i>
+                         <input type="password" name="userLoginPassword" placeholder="密码：">
+                     </div>
+                 </div>
+                 <div class="field">
+                     <div class="ui mini left icon input">
+                         <i class="lock icon"></i>
+                         <input type="password" name="userLoginPassword2" placeholder="再输入一次密码：">
+                     </div>
+                 </div>
+
+               <div class="field">
+                   <div class="ui mini left icon input">
+                        <i class="user icon"></i>
+                        <input type="text" class="selectphoto" name="photo" placeholder="用户头像：">
+                   </div>
+               </div>
+
+           </div>
+             <button class="ui fluid large teal submit button">提交</button>
+           <div class="ui error mini message"></div>
+           <div class="ui mini success message">${message!}</div>
+         </form>
+
+       </div>
+         <div class="column">
+             <!--头像上传-->
+             <div class="imageBox" >
+                 <div class="thumbBox"></div>
+                 <div class="spinner" style="display: none">Loading...</div>
+
+             </div>
+             <input type="file" data-tooltip="提示：用户头像上传,非必要!"  name="upload-file" id="upload-file">
+             <div class="ui buttons">
+                 <!--  &lt;!&ndash;<button class="ui button" id="btnCrop">裁切</button>&ndash;&gt;
+                  &lt;!&ndash;<button class="ui button" id="btnZoomIn">+</button>
+                  <button class="ui button" id="btnZoomOut">-</button>&ndash;&gt;-->
+                  <button class="ui button" id="blobSubmit">提交</button>
+              </div>
+          </div>
+     </div>
+   </div>
+ </div>
+
+
+<!--<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>-->
+<script src="${ctxPath}/js/jquery-1.11.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+<script src="${ctxPath}/lib/cropbox/cropbox.js" type="text/javascript"></script>
+
+
+<script>
+/*表单验证*/
+  $('.ui.form').form({
+    fields : {
+        userLoginName : {
+        identifier: 'userLoginName',
+        rules: [{
+          type : 'empty',
+          prompt: '请输入用户名'
+        }]
+      },
+        userRealName : {
+        identifier: 'userRealName',
+        rules: [{
+          type : 'empty',
+          prompt: '请输入用户真实姓名'
+               }]
+      },
+        userNickname : {
+            identifier: 'userNickname',
+            rules: [{
+                type : 'empty',
+                prompt: '请输入用户昵称'
+            }]
+        },
+        userLoginPassword : {
+            identifier: 'userLoginPassword',
+            rules: [{
+                type : 'empty',
+                prompt: '请输入密码'
+            }]
+        },
+        userLoginPassword2 : {
+            identifier: 'userLoginPassword2',
+            rules: [{
+                type : 'empty',
+                prompt: '请再次输入密码'
+            }]
+        }
+
+    }
+  });
+/*头像上传指示*/
+  $('.selectphoto').popup({
+        position : 'right center',
+        target   : '#upload-file',
+        title    : '用户头像选择',
+        content  : '用于用户形象展示,非必要上传!'
+    }) ;
+  /*头像上传*/
+ $(window).load(function() {
+         var options =
+             {
+                 thumbBox: '.thumbBox',
+                 spinner: '.spinner',
+                 imgSrc: '${ctxPath}/images/avatar.png'
+             }
+         //显示图片
+         //var cropper = $('.imageBox').cropbox(options);
+         $('#upload-file').on('change', function(){
+             var reader = new FileReader();
+             reader.onload = function(e) {
+                 options.imgSrc = e.target.result;
+                 //显示图片
+                 cropper = $('.imageBox').cropbox(options);
+             }
+             reader.readAsDataURL(this.files[0]);
+             this.files = [];
+         })
+      $('#blobSubmit').on('click', function(){
+          var img = cropper.getBlob();
+          var formdata = new FormData();
+          formdata.append("imagefile", img);
+          $.ajax({
+              url:"/file/updateHeadPicture",
+              data: formdata,
+              type:"post",
+              //默认值: true。默认情况下，通过data选项传递进来的数据，如果是一个对象(技术上讲只要不是字符串)，
+              // 都会处理转化成一个查询字符串，以配合默认内容类型 "application/x-www-form-urlencoded"。如果要发送 DOM 树信息或其它不希望转换的信息，请设置为 false。
+              processData: false,
+              contentType: false,
+              success: function(oResult) {
+                 /* if(oResult.success==1){
+                      //window.location.href="/image";
+                      alert(oResult.message);
+                  }else{
+                      alert(oResult.message);
+                  }*/
+                  alert(oResult.message);
+              }
+          })
+      })
+      $('#btnCrop').on('click', function(){
+          var img = cropper.getDataURL();
+          $('.cropped').html('');
+          $('.cropped').append('<img src="'+img+'" align="absmiddle" style="width:64px;margin-top:4px;border-radius:64px;box-shadow:0px 0px 12px #7E7E7E;" ><p>64px*64px</p>');
+          $('.cropped').append('<img src="'+img+'" align="absmiddle" style="width:128px;margin-top:4px;border-radius:128px;box-shadow:0px 0px 12px #7E7E7E;"><p>128px*128px</p>');
+          $('.cropped').append('<img src="'+img+'" align="absmiddle" style="width:180px;margin-top:4px;border-radius:180px;box-shadow:0px 0px 12px #7E7E7E;"><p>180px*180px</p>');
+      })
+      $('#btnZoomIn').on('click', function(){
+          cropper.zoomIn();
+      })
+      $('#btnZoomOut').on('click', function(){
+          cropper.zoomOut();
+      })
+  });
+</script>
+
+</body>
+</html>
