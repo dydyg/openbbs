@@ -27,7 +27,17 @@
     <favorites_list name="openbbs" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/hc/openbbs/test.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="250">
+              <caret line="10" column="34" selection-start-line="10" selection-start-column="34" selection-end-line="10" selection-end-column="34" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -109,7 +119,6 @@
         <option value="$PROJECT_DIR$/src/main/java/com/hc/openbbs/controller/IndexController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/hc/openbbs/mapper/BbsMapper.java" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/index.html" />
-        <option value="$PROJECT_DIR$/src/main/java/com/hc/openbbs/test.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/hc/openbbs/service/impl/BbsServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/hc/openbbs/util/TestNewClass.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/hc/openbbs/interceptor/LoginInterceptor.java" />
@@ -118,6 +127,7 @@
         <option value="$PROJECT_DIR$/src/main/java/com/hc/openbbs/config/ShiroConfig.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/hc/openbbs/controller/admin/LoginController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/hc/openbbs/test.java" />
       </list>
     </option>
   </component>
@@ -150,7 +160,7 @@
       <select />
     </treeState>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="557" />
     <option name="y" value="106" />
     <option name="width" value="983" />
@@ -168,6 +178,11 @@
             <path>
               <item name="openbbs" type="58d84e3e:PackageViewProjectNode" />
               <item name="openbbs" type="616d4139:PackageViewModuleNode" />
+            </path>
+            <path>
+              <item name="openbbs" type="58d84e3e:PackageViewProjectNode" />
+              <item name="openbbs" type="616d4139:PackageViewModuleNode" />
+              <item name="com.hc.openbbs" type="1f31426a:PackageElementNode" />
             </path>
           </expand>
           <select />
@@ -187,7 +202,7 @@
     <property name="RequestMappingsPanelWidth2" value="75" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552465744363" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552467224521" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="project.structure.last.edited" value="Modules" />
@@ -642,7 +657,7 @@
       <workItem from="1552010518469" duration="9000" />
       <workItem from="1552010571662" duration="512000" />
       <workItem from="1552011495634" duration="6973000" />
-      <workItem from="1552459375624" duration="6337000" />
+      <workItem from="1552459375624" duration="7155000" />
     </task>
     <task id="LOCAL-00001" summary="新建的测试file">
       <created>1552014834208</created>
@@ -655,7 +670,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="539330000" />
+    <option name="totallyTimeSpent" value="540148000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -668,6 +683,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.8352713" visible="true" weight="0.2769923" />
       <window_info id="Structure" order="1" sideWeight="0.751938" weight="0.24918744" />
@@ -679,13 +695,13 @@
       <window_info id="Capture Tool" order="7" />
       <window_info id="Designer" order="8" />
       <window_info anchor="bottom" id="Problems" />
-      <window_info anchor="bottom" id="Event Log" order="0" sideWeight="0.14717224" side_tool="true" visible="true" weight="0.2433936" />
+      <window_info anchor="bottom" id="Event Log" order="0" sideWeight="0.50064266" side_tool="true" visible="true" weight="0.32962447" />
       <window_info anchor="bottom" id="调试" order="1" sideWeight="0.4973139" weight="0.32820514" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.8528278" visible="true" weight="0.2433936" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.8528278" weight="0.2433936" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Java Enterprise" order="4" sideWeight="0.49095023" weight="0.3237288" />
       <window_info anchor="bottom" x="0" y="22" width="1366" height="706" id="REST Client" order="5" type="WINDOWED" />
-      <window_info anchor="bottom" id="Version Control" order="6" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="6" sideWeight="0.4993573" visible="true" weight="0.32962447" />
       <window_info anchor="bottom" id="消息" order="7" sideWeight="0.27155825" weight="0.3670473" />
       <window_info anchor="bottom" id="TODO" order="8" sideWeight="0.49016643" weight="0.32711864" />
       <window_info anchor="bottom" id="Spring" order="9" sideWeight="0.48491704" weight="0.3220339" />
@@ -988,17 +1004,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/hc/openbbs/test.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="9" column="36" selection-start-line="9" selection-start-column="36" selection-end-line="9" selection-end-column="36" />
-          <folding>
-            <element signature="e#152#153#0" expanded="true" />
-            <element signature="e#168#169#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/hc/openbbs/util/TestNewClass.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="167">
@@ -1125,6 +1130,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="234">
           <caret line="59" column="13" selection-start-line="59" selection-start-column="13" selection-end-line="59" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/hc/openbbs/test.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="10" column="34" selection-start-line="10" selection-start-column="34" selection-end-line="10" selection-end-column="34" />
         </state>
       </provider>
     </entry>
