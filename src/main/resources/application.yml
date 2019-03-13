@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: pro
+    active: dev
 #头像放置路径
 headPath:
     #home: C:\\home\\myblog\\pic\\   #由于Chrome浏览器不允许加载本地文件，可以考虑改为相对路径

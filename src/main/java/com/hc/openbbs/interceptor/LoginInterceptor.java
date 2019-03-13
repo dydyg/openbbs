@@ -11,23 +11,23 @@ import javax.servlet.http.HttpServletResponse;
  * @desc 登陆拦截器+WebConfig 共同控制
  **/
 public class LoginInterceptor extends HandlerInterceptorAdapter{
-    /**
-     * 重写请求预处理
-     * @param request
-     * @param response
-     * @param handler
-     * @return
-     * @throws Exception
-     */
-    @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        /**
-         * 用户是否登陆
-         */
-        if(request.getSession().getAttribute("user")==null){
-            response.sendRedirect("/admin");
-            return false;
-        }
-        return true;
-    }
+//    /**
+//     * 重写请求预处理
+//     * @param request
+//     * @param response
+//     * @param handler
+//     * @return
+//     * @throws Exception
+//     */
+//    @Override
+//    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+//        /**
+//         * 用户是否登陆
+//         */
+//        if(request.getSession().getAttribute("user")==null){
+//            response.sendRedirect("/admin");
+//            return false;
+//        }
+//        return true;
+//    }
 }
