@@ -39,15 +39,18 @@ public class ShiroConfig {
 //         资源放行
          filterMap.put("/hcbbs","anon");
          filterMap.put("/admin","anon");
+
+         //授权过滤器
+        //注意：当前授权拦截后，shiro会自动跳转到未授权页面
+         filterMap.put("/diarybyid","perms[user:diarybyid]");
+        filterMap.put("/update","perms[user:update]");
 //         资源拦截
-        filterMap.put("/*","authc");
-
-
-//授权过滤器
-     //  filterMap.put("/add","perms[user:add]");
+         filterMap.put("/*","authc");
 
 //         修改调整登录页
-        shiroFilterFactoryBean.setLoginUrl("/admin");
+         shiroFilterFactoryBean.setLoginUrl("/admin");
+         //设置未授权提示页面
+         shiroFilterFactoryBean.setUnauthorizedUrl("/unAuth");
          shiroFilterFactoryBean.setFilterChainDefinitionMap(filterMap);
          return  shiroFilterFactoryBean;
      }

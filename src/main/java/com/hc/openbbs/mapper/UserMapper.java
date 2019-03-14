@@ -30,6 +30,13 @@ public interface UserMapper {
      User  getByLoginName(@Param("LoginName") String LoginName);
 
     /**
+     * 根据用户Id查询用户
+     * @param LoginId
+     * @return
+     */
+     User  getByLoginId(@Param("LoginId") Long LoginId);
+
+    /**
      * 更新用户信息
      * @param userId 用户主键
      * @param head 用户头像
@@ -44,4 +51,6 @@ public interface UserMapper {
      * @return
      */
     public int addUser(User user);
+
+
 }

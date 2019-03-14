@@ -9,6 +9,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.DefaultResourceLoader;
+import org.springframework.core.io.support.ResourcePatternResolver;
+import org.springframework.core.io.support.ResourcePatternUtils;
 
 /*
 beetl模版注册类
@@ -25,13 +28,26 @@ public class BeetlTemplateConfig {
     @ConditionalOnMissingBean(name = { "beetlConfig" })
     public BeetlGroupUtilConfiguration getBeetlGroupUtilConfiguration() {
         BeetlGroupUtilConfiguration beetlGroupUtilConfiguration = new BeetlGroupUtilConfiguration();
+
         try {
+            //设置SpringBoot模板路径路径
             ClasspathResourceLoader cploder = new ClasspathResourceLoader(BeetlTemplateConfig.class.getClassLoader(),templatesPath);
+            //配置root路径
             beetlGroupUtilConfiguration.setResourceLoader(cploder);
             return beetlGroupUtilConfiguration;
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+
+
+        //获取SpringBoot的ClassLoader
+        //ClassLoader  loader = BeetlTemplateConfig.class.getClassLoader();
+        //设置Springboot的shiro标签
+        //GroupTemplate groupTemplate = beetlGroupUtilConfiguration.getGroupTemplate();
+        //groupTemplate.registerFunctionPackage("so", new ShiroExt());
+        //groupTemplate.setClassLoader(loader);
+       // return beetlGroupUtilConfiguration;
+
     }
 
     @Bean(name = "beetlViewResolver")

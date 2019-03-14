@@ -29,6 +29,7 @@ public class User {
     private String updatebyname; //'更新者名称'
     private Date updatedate; //'更新日期'
     private String delflag; //'删除标记'
+    private String perms; //shiro授权字符串
     //构造函数
     public User() {}
     public User(String id) {
@@ -224,6 +225,13 @@ public class User {
         this.delflag = delflag;
     }
 
+    public String getPerms() {
+        return perms;
+    }
+    public void setPerms(String perms) {
+        this.perms = perms;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -238,7 +246,7 @@ public class User {
                 ", userCorp='" + userCorp + '\'' +
                 ", userNickname='" + userNickname + '\'' +
                 ", userType='" + userType + '\'' +
-                ", userPhoto='" + userPhoto + '\'' +
+               // ", userPhoto='" + userPhoto + '\'' +
                 ", userLoginIp='" + userLoginIp + '\'' +
                 ", userLoginDate=" + userLoginDate +
                 ", userLoginFlag='" + userLoginFlag + '\'' +
@@ -250,6 +258,7 @@ public class User {
                 ", updatebyname='" + updatebyname + '\'' +
                 ", updatedate=" + updatedate +
                 ", delflag='" + delflag + '\'' +
+                ", perms='" + perms + '\'' +
                 '}';
     }
 }

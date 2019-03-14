@@ -115,9 +115,9 @@
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.datatype:jackson-datatype-joda:2.8.10" level="project" />
     <orderEntry type="library" name="Maven: joda-time:joda-time:2.9.9" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.module:jackson-module-parameter-names:2.8.10" level="project" />
-    <orderEntry type="library" name="Maven: com.ibeetl:beetl-framework-starter:1.1.15.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: com.ibeetl:beetlsql:2.9.10" level="project" />
-    <orderEntry type="library" name="Maven: com.ibeetl:beetl:2.7.22" level="project" />
+    <orderEntry type="library" name="Maven: com.ibeetl:beetl-framework-starter:1.1.55.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: com.ibeetl:beetlsql:2.10.29" level="project" />
+    <orderEntry type="library" name="Maven: com.ibeetl:beetl:2.8.5" level="project" />
     <orderEntry type="library" name="Maven: org.antlr:antlr4-runtime:4.2" level="project" />
     <orderEntry type="library" name="Maven: org.abego.treelayout:org.abego.treelayout.core:1.0.1" level="project" />
     <orderEntry type="library" name="Maven: org.antlr:antlr4-annotations:4.2" level="project" />

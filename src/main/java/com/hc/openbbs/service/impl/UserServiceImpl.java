@@ -15,7 +15,6 @@ import java.util.List;
  */
 @Service(value = "userService")
 public class UserServiceImpl implements UserService {
-
     @Autowired
     private UserMapper userMapper;//这里会报错，但是并不会影响
 
@@ -58,5 +57,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getByLoginName(String LoginName) {
         return userMapper.getByLoginName(LoginName);
+    }
+
+    /**
+     * 根据用户ID查询用户
+     * @param LoginId
+     * @return
+     */
+    @Override
+    public User getByLoginId(Long LoginId) {
+        return userMapper.getByLoginId(LoginId);
     }
 }

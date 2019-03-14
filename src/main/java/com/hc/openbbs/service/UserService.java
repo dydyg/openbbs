@@ -34,4 +34,13 @@ public interface UserService {
      * @return
      */
     User getByLoginName(String LoginName);
+
+    /**
+     * 根据ID查询用户
+     * @param LoginId
+     * @return
+     */
+    User getByLoginId(Long LoginId);
+
+
 }

@@ -74,6 +74,10 @@ public class IndexController {
         //model.addAttribute("commentlist",commments );
         return "/diary.html";
     }
+    @GetMapping("/unAuth")
+    public String unAuth() {
+        return "/error/unAuth.html";
+    }
     @GetMapping("/register")
     public String register(){
         return "/register.html";

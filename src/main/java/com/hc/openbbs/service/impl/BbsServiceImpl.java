@@ -17,7 +17,7 @@ import java.util.List;
  * @create 2018-01-22 13:32
  * @desc 论坛列表
  **/
-@Service(value = "BbsService")
+@Service(value = "bbsService")
 public class BbsServiceImpl implements BbsService{
     @Autowired
     private BbsMapper bbsMapper;
